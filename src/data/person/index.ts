@@ -4,6 +4,7 @@ export interface Person {
   name: string;
   address: string;
   age: number;
+  email: string;
 }
 
 const PersonSchema = new Schema<Person>({

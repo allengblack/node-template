@@ -1,11 +1,11 @@
-import "reflect-metadata";
 import dotenv from 'dotenv';
 import { app } from "./app";
 import DB from './db';
 
 dotenv.config();
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT;
+
 const start = async () => {
   try {
     await DB.connect();
