@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import faker from "faker";
 import Status from "http-status-codes";
 import supertest, { SuperTest, Test } from "supertest";
