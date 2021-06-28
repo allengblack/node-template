@@ -44,8 +44,8 @@ describe("People", () => {
       name: faker.name.findName(),
       email: faker.internet.email(),
       age: faker.datatype.number(100)
-    })
+    });
     const res = await request.get("/people").expect(Status.OK);
     expect(res.body).toHaveLength(1);
   });
-})
+});
