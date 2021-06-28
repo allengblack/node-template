@@ -2,10 +2,7 @@ name: Build API Server
 
 on:
   pull_request:
-    branches: ['*']
-    paths:
-      - "api/**"
-      - ".github/workflows/ci-api-server.yml"
+    branches: ['master']
 
 jobs:
   build:
