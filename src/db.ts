@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose, { Connection } from 'mongoose';
-import { disconnect } from 'mongoose';
 
 dotenv.config();
 
@@ -22,13 +21,13 @@ export class DB {
       useCreateIndex: true
     });
 
-    console.log("🛢 Database connected successfully.")
+    console.log("🛢 Database connected successfully.");
   }
 
   async disconnect() {
-    mongoose.connections.forEach(async con => {
-      await con.close();
-    });
+    for (const conn of mongoose.connections) {
+      await conn.close();
+    }
 
     if (this.mongod) {
       await this.mongod.stop();
