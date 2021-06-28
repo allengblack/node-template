@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { connect, Connection, disconnect } from 'mongoose';
+import mongoose, { Connection } from 'mongoose';
+import { disconnect } from 'mongoose';
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ export class DB {
       process.env.MONGO_URL = await this.mongod.getUri();
     }
 
-    await connect(process.env.MONGO_URL, {
+    await mongoose.connect(process.env.MONGO_URL, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true
@@ -25,7 +26,10 @@ export class DB {
   }
 
   async disconnect() {
-    await disconnect();
+    mongoose.connections.forEach(async con => {
+      await con.close();
+    });
+
     if (this.mongod) {
       await this.mongod.stop();
     }

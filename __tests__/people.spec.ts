@@ -14,6 +14,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await DB.disconnect();
+  await new Promise(resolve => setTimeout(resolve, 1000));
 });
 
 afterEach(async () => {
