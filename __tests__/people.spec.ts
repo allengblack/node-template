@@ -8,8 +8,11 @@ import { app } from "../src/app";
 let request: SuperTest<Test>;
 
 beforeAll(async () => {
-  request = supertest(app.listen());
-  await DB.connect();
+  return DB.connect().then(() => {
+    return new Promise((resolve, reject) => {
+      request = supertest(app.listen(resolve));
+    });
+  });
 });
 
 afterAll(async () => {
